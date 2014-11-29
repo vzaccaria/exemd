@@ -15,3 +15,21 @@ digraph {
     }
 ```
 
+## Another diagram
+
+```{dot ! abc}
+digraph {
+        a -> b[label="0.2",weight="0.2"];
+        a -> c[label="0.4",weight="0.4"];
+    }
+```
+
+## Ditaa
+
+```{ditaa ! }
++--------------+
+|              |
+| Hello World! |
+|              |
++--------------+
+```
