@@ -4,7 +4,7 @@ This is a minimal example of using **exemd** to produce an _HTML_ page from _Mar
 
 ## exemd code chunks
 
-```{dot}
+```{dot ! xyz}
 digraph {
         a -> b[label="0.2",weight="0.2"];
         a -> c[label="0.4",weight="0.4"];

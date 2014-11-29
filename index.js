@@ -45,7 +45,7 @@
       return done(it, null);
     });
   });
-  codeRegex = v().then("```").anythingBut("{").then("{").beginCapture().word().endCapture().beginCapture().anythingBut("}").endCapture().then("}").beginCapture().anythingBut("```").endCapture().then("```");
+  codeRegex = v().then("```").anythingBut("{").then("{").beginCapture().word().endCapture().anythingBut("!").then("!").beginCapture().anythingBut("}").endCapture().then("}").beginCapture().anythingBut("```").endCapture().then("```");
   tmpdir = prepare();
   matchArray = [];
   promiseArray = [];
