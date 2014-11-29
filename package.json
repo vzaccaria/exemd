@@ -1,0 +1,21 @@
+{
+  "name": "exemd",
+  "version": "0.0.1",
+  "description": "Execute your markdown",
+  "bin": {
+    "exemd": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Vittorio Zaccaria",
+  "license": "BSD",
+  "usage": "",
+  "dependencies": {
+    "docopt": "~0.4.1",
+    "verbal-expressions": "~0.1.2",
+    "uid": "0.0.2",
+    "async-replace": "~1.0.0"
+  }
+}
