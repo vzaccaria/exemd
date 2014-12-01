@@ -8,7 +8,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["markdown", "code blocks", "org-mode", "code", "execute"],
   "author": "Vittorio Zaccaria",
   "license": "BSD",
   "usage": "",
