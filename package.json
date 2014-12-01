@@ -1,7 +1,7 @@
 {
   "name": "exemd",
   "version": "0.0.1",
-  "description": "Execute your markdown",
+  "description": "Pre-process markdown code blocks with external tools to produce html. Because we want to do everything with markdown right? ",
   "bin": {
     "exemd": "./index.js"
   },

@@ -1,8 +1,10 @@
-# A Minimal Example for Markdown
+# A Minimal Example of Executed Markdown.
 
-This is a minimal example of using **exemd** to produce an _HTML_ page from _Markdown_.
+This is a minimal example of using **exemd** to produce an _HTML_ page from _Markdown_. You can check the source here.
 
-## exemd code chunks
+## Diagram with [dot](http://www.graphviz.org/)
+
+Taken [from here](http://graphs.grevian.org/example)
 
 ```{dot ! xyz}
 digraph {
@@ -15,16 +17,8 @@ digraph {
     }
 ```
 
-## Another diagram
+## Diagram with [Ditaa](http://ditaa.sourceforge.net/) 
 
-```{dot ! abc}
-digraph {
-        a -> b[label="0.2",weight="0.2"];
-        a -> c[label="0.4",weight="0.4"];
-    }
-```
-
-## Ditaa
 
 ```{ditaa ! }
 +--------------+

@@ -7,7 +7,8 @@ uid                  = require('uid')
 Promise              = require('bluebird')
 asyncrepl            = require('async-replace')
 
-module-path = "/usr/local/share/npm/lib/node_modules/"
+#module-path = "/usr/local/share/npm/lib/node_modules/"
+module-path = ""
 
 require! 'fs'
 

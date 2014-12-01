@@ -9,7 +9,7 @@
   uid = require('uid');
   Promise = require('bluebird');
   asyncrepl = require('async-replace');
-  modulePath = "/usr/local/share/npm/lib/node_modules/";
+  modulePath = "";
   fs = require('fs');
   doc = "Usage:\n    exemd FILE [ -p | --pdf ] [ -r | --raw ] \n    exemd -h | --help \n\nOptions:\n    -p, --pdf   Generate a pdf\n    -r, --raw   Unfold and execute blocks, generate raw markdown\n    -h, --help  \n\nArguments: \n    FILE       markdown file name.\n";
   getOption = function(a, b, def, o){

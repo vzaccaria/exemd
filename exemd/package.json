@@ -1,0 +1,26 @@
+{
+  "name": "exemd",
+  "version": "0.0.0",
+  "description": "Simple webpage",
+  "repository": "",
+  "author": "Vittorio Zaccaria",
+  "license": "BSD",
+  "dependencies": {
+    "LiveScript": "1.2.0",
+    "browserify": "2.36.1",
+    "connect-livereload": "0.4.0",
+    "tiny-lr": "0.0.5",
+    "express": "^4.2.0",
+    "jade": "^1.3.1",
+    "underscore.string": "^2.3.3",
+    "debug": "^2.0.0",
+    "jquery": "~2.1.1",
+    "fastclick": "~1.0.3",
+    "liveify": "~1.3.1",
+    "shell-escape": "~0.1.0"
+  },
+  "devDependencies": {
+    "connect-livereload": "^0.4.0",
+    "tiny-lr": "0.0.5"
+  }
+}
