@@ -10,6 +10,10 @@ npm i -g exemd
 ```
 
 
+## Info
+
+Website coming soon. 
+
 ## Usage
 
     exemd FILE [ -p | --pdf ] [ -r | --pure ] 
