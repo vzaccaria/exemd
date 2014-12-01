@@ -99,12 +99,13 @@ match-array = []
 promise-array = []
 
 par = (regex, my-async-replace, string) -->
-    new Promise (res, rej) ->
-        asyncrepl string, regex, my-async-replace, (err, result) ->
-            if string == result
-                rej(string)
-            else
-                res(result)
+    let lstring = string
+        new Promise (res, rej) ->
+            asyncrepl lstring, regex, my-async-replace, (err, result) ->
+                if lstring == result
+                    rej(lstring)
+                else
+                    res(result)
 
 promiseWhile = (init, action) ->
   val = init

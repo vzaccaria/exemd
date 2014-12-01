@@ -25,7 +25,7 @@ parse ->
             "jade -O ./site.json -P -p #{it.orig-complete} < #{it.orig-complete} | beml-cli "
 
         cmd = -> 
-            [ jade(it), substitute2('./assets/example.html', '<include>') ] * ' | ' + " > #{it.build-target} "
+            [ jade(it), substitute('./assets/example.html', '<include>') ] * ' | ' + " > #{it.build-target} "
 
         @compile-files( cmd, ".html", g, deps )
 

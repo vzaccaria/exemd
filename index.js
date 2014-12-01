@@ -59,15 +59,17 @@
   matchArray = [];
   promiseArray = [];
   par = curry$(function(regex, myAsyncReplace, string){
-    return new Promise(function(res, rej){
-      return asyncrepl(string, regex, myAsyncReplace, function(err, result){
-        if (string === result) {
-          return rej(string);
-        } else {
-          return res(result);
-        }
+    return (function(lstring){
+      return new Promise(function(res, rej){
+        return asyncrepl(lstring, regex, myAsyncReplace, function(err, result){
+          if (lstring === result) {
+            return rej(lstring);
+          } else {
+            return res(result);
+          }
+        });
       });
-    });
+    }.call(this, string));
   });
   promiseWhile = function(init, action){
     var val;
