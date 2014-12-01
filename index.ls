@@ -138,12 +138,6 @@ promised-replace(code-regex, replace-code(tmpdir), f)
         rm('-rf', tmpdir)
 
 
-# while (match-array = code-regex.exec(f)) != null
-#     m = match-array
-#     promise-array.push(replace-code(m[0], m[1], m[2], m[3], tmpdir))
-
-# bb.all(promise-array).then ->
-
 
 
 

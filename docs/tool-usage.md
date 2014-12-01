@@ -1,6 +1,7 @@
 
 ## Info
 
+Install `pandoc` before `exemd`.
 Website coming soon. 
 
 ## Usage

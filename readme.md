@@ -12,6 +12,7 @@ npm i -g exemd
 
 ## Info
 
+Install `pandoc` before `exemd`.
 Website coming soon. 
 
 ## Usage
