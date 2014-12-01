@@ -19,13 +19,18 @@ parse ->
     @add-plugin 'jadeBeml',(g, deps) ->
 
         substitute = (filename, tag) ->
-            "sed -e '/#tag/r #filename'"
+            "stupid-replace #tag -f #filename"
 
         jade = ->
-            "jade -O ./site.json -P -p #{it.orig-complete} < #{it.orig-complete} | beml-cli "
+            "jade -O ./site.json -P -p #{it.orig-complete} | beml-cli "
 
         cmd = -> 
-            [ jade(it), substitute('./assets/example.html', '<include>') ] * ' | ' + " > #{it.build-target} "
+            ops = 
+                "cat #{it.orig-complete} "
+                jade(it)
+                substitute('./assets/example.html', '{{include}}')
+                substitute('./assets/usage.html', '{{usage}}')
+            return ops * ' | ' + " > #{it.build-target} "
 
         @compile-files( cmd, ".html", g, deps )
 
@@ -53,6 +58,16 @@ parse ->
         @command-seq -> [
             @make "all"
             @cmd "blog-ftp-cli -l #name -r #baseUrl"
+            ]
+    @collect "update-docs", -> [
+            @cmd "exemd ../test/x.md > ./assets/example.html"
+            @cmd "pandoc ../docs/tool-usage.md > ./assets/usage.html"
+            ]
+
+    @collect "complete", ->
+        @command-seq -> [
+            @make "update-docs"
+            @make "all"
             ]
 
     @collect "clean", -> [

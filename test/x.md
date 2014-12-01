@@ -3,10 +3,9 @@
 This is a minimal example of using **exemd** to produce an _HTML_ page from _Markdown_. You can check the source here.
 
 ## Diagram with [dot](http://www.graphviz.org/)
+`dot` is a language for "hierarchical" or layered drawings of directed graphs. It is part of the [graphviz](http://www.graphviz.org/) package. Here we are using the [`exemd-dot`](https://www.npmjs.org/package/exemd-dot) plugin to draw a diagram [from this page](http://graphs.grevian.org/example):
 
-Taken [from here](http://graphs.grevian.org/example)
-
-```{dot ! xyz}
+```{dot ! }
 digraph {
         a -> b[label="0.2",weight="0.2"];
         a -> c[label="0.4",weight="0.4"];
@@ -19,11 +18,20 @@ digraph {
 
 ## Diagram with [Ditaa](http://ditaa.sourceforge.net/) 
 
+Ditaa is:
+
+> ... a small command-line utility written in Java, that can convert diagrams drawn using ascii art ('drawings' that contain characters that resemble lines like | / - ). into proper bitmap graphics
+
+Here we are using the [`exemd-ditaa`](https://www.npmjs.org/package/exemd-dot) plugin to produce a base64-encoded inlined image taken from the project front page:
 
 ```{ditaa ! }
-+--------------+
-|              |
-| Hello World! |
-|              |
-+--------------+
+    +--------+   +-------+    +-------+
+    |        | --+ ditaa +--> |       |
+    |  Text  |   +-------+    |diagram|
+    |Document|   |!magic!|    |       |
+    |     {d}|   |       |    |       |
+    +---+----+   +-------+    +-------+
+        :                         ^
+        |       Lots of work      |
+        +-------------------------+
 ```

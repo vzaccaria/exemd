@@ -1,5 +1,55 @@
+@import (reference) "../bower_components/bootstrap/less/bootstrap.less";
+@import url(http://fonts.googleapis.com/css?family=Inconsolata:400,700);
+@import url(http://fonts.googleapis.com/css?family=Francois+One);
+
+@color: lighten(#ddd, 10%);
 
 
-g {
-	background: #000;
+body {
+	background: @color;
+	line-height: 1.3em;
+	font-size: 1rem;
+	font-family: 'Inconsolata';
+}
+
+code, pre {
+	line-height: 1.3em;
+	font-size: 1rem;
+	font-family: 'Inconsolata';
+	color: #c0392b;
+}
+
+.smallcaps (@color, @font-weight) {
+    // depends on the font family.
+    // some font-families don't support small caps
+    // or don't provide them with their web font.
+    font-variant: small-caps;
+    font-weight: @font-weight;
+    text-transform: lowercase;
+    color: @color;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: 'Francois One';
+	margin-top: 2rem;
+	.smallcaps(#000, 500);
+	line-height: 1.3em;
+}
+
+svg {
+	display: block;
+	margin: auto;
+ 	& > g > polygon {
+		fill: @color;
+	}
+}
+
+img {
+	display: block;
+	margin: auto;
+}
+
+.page {
+	.container-fluid();
+	max-width: 40rem; 
 }

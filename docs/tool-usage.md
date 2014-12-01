@@ -6,7 +6,7 @@ Website coming soon.
 
 ## Usage
 
-    exemd FILE [ -p | --pdf ] [ -r | --pure ] 
+    exemd FILE [ -p | --pdf ] [ -r | --raw ] 
     exemd -h | --help 
 
     Options:
@@ -29,17 +29,23 @@ Each code block should begin with the language specifier followed by a bang (`!`
 
     ```{dot !}
 
-    diagram definition in dot...
+    digraph {
+            a -> b[label="0.2",weight="0.2"];
+            a -> c[label="0.4",weight="0.4"];
+            c -> b[label="0.6",weight="0.6"];
+            c -> e[label="0.6",weight="0.6"];
+            e -> e[label="0.1",weight="0.1"];
+            e -> b[label="0.7",weight="0.7"];
+        }
 
     ```
 
-This will invoke the `exemd-dot` plugin (which should be installed separately). The plugin will parse the block code by invoking the actual `dot` executable and the parsed `svg` will be put in the pasted into the final markdown (or html).
+`exemd` will invoke the `exemd-dot` plugin (which should be installed separately). The plugin will parse the block code by invoking the actual `dot` executable and the parsed `svg` will be pasted into the final markdown (or html).
 
 Depending on the plugin, you can also pass parameters (just as in org-mode)
 
-    ```{dot ! plugin parameters string}
+    ```{plugin-name ! plugin parameters string}
 
-    diagram definition in dot...
 
     ```
 
