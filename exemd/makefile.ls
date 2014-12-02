@@ -52,6 +52,9 @@ parse ->
         @notify ~>
             @toDir d(""), { strip: s("") }, ->
                        @browserify s("/js/client.ls"), s("/js/*.{ls,js}")
+
+        @toDir d(""), { strip: s("") }, ->
+            @copy s("/example.md")
         ]
 
     @collect "deploy", -> 
@@ -62,6 +65,7 @@ parse ->
     @collect "update-docs", -> [
             @cmd "exemd ../test/x.md > ./assets/example.html"
             @cmd "pandoc ../docs/tool-usage.md > ./assets/usage.html"
+            @cmd "cp ../test/x.md ./assets/example.md"
             ]
 
     @collect "complete", ->

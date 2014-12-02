@@ -1,16 +1,15 @@
 
-## Info
+## What is it
 
-Install `pandoc` before `exemd`.
-Website coming soon. 
+It is a markdown pre-processor that runs code inside *code blocks*, by pasting the output back into the original document. It can produce either processed markdown (with inlined SVG or base64 encoded png) or HTML. 
+
 
 ## Usage
 
-    exemd FILE [ -p | --pdf ] [ -r | --raw ] 
+    exemd FILE [ -r | --raw ] 
     exemd -h | --help 
 
     Options:
-        -p, --pdf   Generate a pdf
         -r, --raw   Unfold and execute blocks, generate raw markdown
         -h, --help  
 
@@ -20,8 +19,6 @@ Website coming soon.
 ## Defaults
 
 By default, `exemd` invokes `pandoc` to generate html. If you use `--raw` you will get a raw markdown with expanded blocks. 
-
-*Note*: the `pdf` option does not work at the moment.
 
 ## Syntax
 
@@ -52,3 +49,18 @@ Depending on the plugin, you can also pass parameters (just as in org-mode)
 ## Plugins 
 
 Look for npm modules prefixed with `exemd`. I wrote only `exemd-dot` and `exemd-ditaa` for diagrams. Feel free to provide plugins for R (like `kintr`) or other languages.
+
+Each plugin should export a `process(block, opts)` function, where: 
+
+* `block` is the string representing the inner part of the block code
+* `opts` is an object with the following properties:
+
+    - `tmpdir` an already setup temporary directory where the plugin can mess around but not delete.
+    - `params` the string following the bang (`!`) in the block declaration
+    - `target-mode` it can be either `html`, `pdf`, or `raw` (however, pdf is not supported now)
+
+The function should return the markdown text to replace the original block. It can return `html` if the
+target-mode is `html` or `raw`.
+
+
+
