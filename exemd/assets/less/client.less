@@ -58,13 +58,24 @@ svg {
 	max-width: 50rem; 
 }
 
+.text-shadow() {
+
+            text-shadow: 
+               0 -6px 1px rgba(0,0,0,.1),
+               0 -0 5px rgba(0,0,0,.1),
+               0 -1px 3px rgba(0,0,0,.3),
+               0 -3px 5px rgba(0,0,0,.2),
+               0 -5px 10px rgba(0,0,0,.25),
+               0 -10px 10px rgba(0,0,0,.2),
+               0 -20px 20px rgba(0,0,0,.15);
+}
 
 .page-header {
 	background: #555;
 
 	&__content {
-		padding-top: 10%;
-		padding-bottom: 10%;
+		padding-top: 5%;
+		padding-bottom: 5%;
 		border-bottom: 1px white solid;
 		-webkit-box-shadow: inset 0px -12px 54px -20px rgba(0,0,0,0.75);
 		-moz-box-shadow: inset 0px -12px 54px -20px rgba(0,0,0,0.75);
@@ -75,8 +86,9 @@ svg {
 		color: darken(white, 10%);
 		text-align: center;
 		font-family: 'Francois One';
-		font-size: 3rem;
+		font-size: 5rem;
 		line-height: 1.5em;
+		.text-shadow();
 	}
 
 	&__subtitle {
@@ -86,6 +98,7 @@ svg {
 		font-size: 1.5rem;	
 		line-height: 1.5em;
 		letter-spacing: 2px;
+		.text-shadow();
 	}
 }
 
@@ -94,8 +107,8 @@ svg {
 	margin-top: 5%;
 
 	&__content {
-		padding-top: 10%;
-		padding-bottom: 10%;
+		padding-top: 5%;
+		padding-bottom: 5%;
 		border-bottom: 1px white solid;
 		-webkit-box-shadow: inset 0px -12px 54px -20px rgba(0,0,0,0.75);
 		-moz-box-shadow: inset 0px -12px 54px -20px rgba(0,0,0,0.75);
@@ -109,6 +122,18 @@ svg {
 		font-family: 'Francois One';
 		font-size: 1rem;	
 		line-height: 1.5em;
+	}
+
+	&__share {
+		padding-top: 2rem;
+		display: block;
+		margin: auto;
+		text-align: center
+	}
+
+	&__share_reddit, 
+	&__share_twitter {
+		display: inline;
 	}
 
 }

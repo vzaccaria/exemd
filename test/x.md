@@ -1,6 +1,6 @@
 # A Minimal Example of Executed Markdown.
 
-This is a minimal example of using **exemd** to produce an _HTML_ page from _Markdown_. You can check [the source here](/example.md). The resulting html has been generated with the following command line:
+This is a minimal example of using **exemd** to produce an _HTML_ page from _Markdown_. You can check [the source here](example.md). The resulting html has been generated with the following command line:
 
 `exemd example.md`
 

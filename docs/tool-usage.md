@@ -59,8 +59,8 @@ Each plugin should export a `process(block, opts)` function, where:
     - `params` the string following the bang (`!`) in the block declaration
     - `target-mode` it can be either `html`, `pdf`, or `raw` (however, pdf is not supported now)
 
-The function should return the markdown text to replace the original block. It can return `html` if the
-target-mode is `html` or `raw`.
+The `process` function should return the markdown text to replace the original block either directly or through a promise. 
+
 
 
 
