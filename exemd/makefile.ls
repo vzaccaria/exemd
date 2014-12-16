@@ -63,9 +63,8 @@ parse ->
             @cmd "blog-ftp-cli -l #name -r #baseUrl"
             ]
     @collect "update-docs", -> [
-            @cmd "exemd ../test/x.md > ./assets/example.html"
+            @cmd "../command.js -g ./assets/example.md > ./assets/example.html"
             @cmd "pandoc ../docs/tool-usage.md > ./assets/usage.html"
-            @cmd "cp ../test/x.md ./assets/example.md"
             ]
 
     @collect "complete", ->

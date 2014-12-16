@@ -37,3 +37,43 @@ Here we are using the [`exemd-ditaa`](https://www.npmjs.org/package/exemd-dot) p
         |       Lots of work      |
         +-------------------------+
 ```
+
+## Diagram with [Ascidia](https://github.com/Frimkron/Ascidia)
+
+A command-line utility for rendering technical diagrams from ASCII art.
+
+This:
+
+```
+               O     
+              -|-  -.
+              / \   | 
+              User  | Request
+                    V
+ Foobar         +--------+       .------.
+  Layer         |  Acme  |       '------'
+- - - - - - +   | Widget |<----->|      |
+   .----.   ;   +--------+       |      |
+  | do-  |  ;       |            '------'
+  |  dad |--^--<|---+            Database
+   '----'   ;
+            ;
+```
+
+becomes this:
+
+```{ascidia !}
+               O     
+              -|-  -.
+              / \   | 
+              User  | Request
+                    V
+ Foobar         +--------+       .------.
+  Layer         |  Acme  |       '------'
+- - - - - - +   | Widget |<----->|      |
+   .----.   ;   +--------+       |      |
+  | do-  |  ;       |            '------'
+  |  dad |--^--<|---+            Database
+   '----'   ;
+            ;
+```

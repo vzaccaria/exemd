@@ -10,7 +10,8 @@ It is a markdown pre-processor that runs code inside *code blocks*, by pasting t
     exemd -h | --help 
 
     Options:
-        -r, --raw   Unfold and execute blocks, generate raw markdown
+        -g, --force-png     Force png generation
+        -r, --raw           Unfold and execute blocks, generate raw markdown
         -h, --help  
 
     Arguments: 
