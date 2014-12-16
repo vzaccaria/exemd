@@ -15,12 +15,12 @@ require! 'fs'
 
 doc = """
 Usage:
-    exemd FILE [ -p | --pdf ] [ -r | --raw ] 
+    exemd FILE [ -r | --raw ] [ -g | --force-png ]
     exemd -h | --help 
 
 Options:
-    -p, --pdf   Generate a pdf
-    -r, --raw   Unfold and execute blocks, generate raw markdown
+    -g, --force-png     Force png generation
+    -r, --raw           Unfold and execute blocks, generate raw markdown
     -h, --help  
 
 Arguments: 
@@ -38,8 +38,8 @@ get-option = (a, b, def, o) ->
 
 o = docopt(doc)
 
-if o['--pdf'] or o['-p'] 
-    target-mode = 'pdf'
+if o['-g'] or o['--force-png'] 
+    target-mode = 'html,png'
 else
     if o['--raw'] or o['-r']
         target-mode = 'raw'

@@ -27,6 +27,8 @@
     "bluebird": "~2.3.11",
     "lodash": "~2.4.1",
     "shelljs": "~0.3.0",
-    "diff-files": "0.0.2"
+    "diff-files": "0.0.2",
+    "debug": "~2.1.0",
+    "underscore.string": "~2.4.0"
   }
 }

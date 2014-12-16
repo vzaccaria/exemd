@@ -1,11 +1,14 @@
 
-{docopt}             = require('docopt')
-_                    = require('lodash')
-{cat,mkdir,rm, exec} = require('shelljs')
-v                    = require('verbal-expressions')
-uid                  = require('uid')
-Promise              = require('bluebird')
-asyncrepl            = require('async-replace')
+{docopt}            = require('docopt')
+_                   = require('lodash')
+{cat,mkdir,rm,exec} = require('shelljs')
+v                   = require('verbal-expressions')
+uid                 = require('uid')
+Promise             = require('bluebird')
+asyncrepl           = require('async-replace')
+debug               = require('debug')('exemd')
+$                   = require('underscore.string')
+uid = require("uid")
 
 #module-path = "/usr/local/share/npm/lib/node_modules/"
 module-path = ""
@@ -22,48 +25,138 @@ prepare = ->
     return dirname
 
 
-replace-code = (tmpdir, target-mode, m, lang, params, code, offset, string, done) -->
 
-    {process} = require("#{module-path}exemd-#{lang}")
-    opts = {}
-    opts.target-mode = target-mode 
-    opts.params = params
-    opts.orig = m
-    opts.tmpdir = tmpdir
-    block = code
+get-block = (string) ->
+    block = v().then("```")
+              .anythingBut("}")
+              .then("}")
+              .beginCapture()
+              .anythingBut("```")
+              .endCapture()
+              .then("```")
+    mtch =  block.exec(string)
+    if mtch?
+        return { block: mtch[1] }
+    else
+        return undefined
 
-    process(block, opts)
-    .then (-> done(null, it)), (-> done(it, null))
+get-header = (string) ->
+
+    header = v().searchOneLine()
+                    .then("```")
+                    .anythingBut("{")
+                    .then("{")
+                    .beginCapture()
+                    .word()
+                    .endCapture()
+                    .anythingBut("!")
+                    .then("!")
+                    .beginCapture()
+                    .anythingBut("}")
+                    .endCapture()
+                    .then("}")
+
+    mtch = header.exec(string)
+    if mtch?
+        return { language: mtch[1], params: mtch[2]} 
+    else
+        return undefined
+
+replace-handler-gen = (tmpdir, target-mode, code-block, offset, string, done) -->
+
+    process        = {}
+    language       = ""
+    params         = {}
+    block          = ""
+    code-block-res = get-header(code-block)
+
+    debug code-block
+    debug code-block-res
+
+    if not code-block-res?
+        debug "Bailing out.."
+        done(null, code-block)
+        return
+    else
+        { language, params } := code-block-res
+
+    block-res = get-block(code-block)
+
+    if not block-res?
+        done(null, code-block)
+        return 
+    else
+        { block } := block-res
+
+    try 
+        debug "Trying language #language"
+        debug "Original code #block"
+        process := require("#{module-path}exemd-#{language}").process
+    catch 
+        debug "uff.. exception"
+        done(code-block)
+        return
+
+    opts             = {}
+    opts.target-mode = target-mode
+    opts.params      = params
+    opts.orig        = code-block
+    opts.tmpdir      = tmpdir
+
+    plugin-template = (targets, block, opts) ->
+
+        params ?= opts.params
+        params ?= ''
+
+        new Promise (resolve, preject) ->
+
+            debug "Running template"
+            debug targets
+            debug opts.target-mode
+            if targets[opts.target-mode]?
+                debug "Si puo' fare!"
+                temp-file = uid(7)
+                cmd = targets[opts.target-mode].cmd(block, temp-file, opts.tmpdir)
+                debug cmd
+                exec cmd, {+async, +silent}, (code, output) ->
+                    output = targets[opts.target-mode].output(temp-file, opts.tmpdir, output)
+                    debug output
+                    if not code
+                        resolve(output)
+                    else
+                        resolve("```#block```")
+            else
+                resolve("```#block```")
+
+    opts.plugin-template = plugin-template
+
+    debug "Invoking process"
+    debug opts
+
+    process(block, opts).then (-> done(null, (it))), (-> done(it, null))
 
 
     # console.log p3
 
-code-regex = v()
-                .then("```")
-                .anythingBut("{")
-                .then("{")
-                .beginCapture()
-                .word()
-                .endCapture()
-                .anythingBut("!")
-                .then("!")
-                .beginCapture()
-                .anythingBut("}")
-                .endCapture()
-                .then("}")
-                .beginCapture()
+
+
+
+code-block = v().then("```")
                 .anythingBut("```")
-                .endCapture()
                 .then("```")
+
+
+code-regex = code-block
+                
 
 
 match-array = []
 promise-array = []
 
-par = (regex, my-async-replace, string) -->
+par = (regex, replace-handler, string) -->
     let lstring = string
         new Promise (res, rej) ->
-            asyncrepl lstring, regex, my-async-replace, (err, result) ->
+            asyncrepl lstring, regex, replace-handler, (err, result) ->
                 if lstring == result
                     rej(lstring)
                 else
@@ -81,21 +174,34 @@ promiseWhile = (init, action) ->
 
       process.nextTick ( -> loop_(init) )
 
-promised-replace = (regex, my-async-replace, string) ->
-    promiseWhile string, par(regex, my-async-replace)
+promised-replace = (regex, replace-handler, string) ->
+    promiseWhile string, par(regex, replace-handler)
 
 
 _module = ->
 
+
+
+
     process = (target-mode, text) ->
 
+        [ final-src, dia-mode ] = $.words(target-mode, ',')
+
+        dia-mode    ?= 'default'
+        final-src   ?= 'html'
+
         tmpdir = prepare!
+    
+        # debug JSON.stringify(code-regex, 0, 4)
+        # debug JSON.stringify(header, 0, 4)
+        # debug JSON.stringify(block, 0, 4)
 
         convert = ->
-            if target-mode == 'raw'
+            if final-src == 'raw'
+                rm('-rf', tmpdir)
                 return it
             else
-                if target-mode == 'html' 
+                if final-src == 'html' 
                     tmp-markdown = "#{tmpdir}/#{uid(7)}.md"
                     it.to(tmp-markdown)
                     
@@ -108,10 +214,10 @@ _module = ->
                             else
                                 rej(output)
                 else
-                    return rej('unsupported') 
+                    throw "unsupported #final-src"
 
 
-        promised-replace(code-regex, replace-code(tmpdir, target-mode), text)
+        promised-replace(code-regex, replace-handler-gen(tmpdir, dia-mode), text)
         .then convert, ->
             rm('-rf', tmpdir)
             throw it
