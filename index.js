@@ -96,7 +96,7 @@
         if (targets[opts.targetMode] != null) {
           debug("Si puo' fare!");
           tempFile = uid(7);
-          cmd = targets[opts.targetMode].cmd(block, tempFile, opts.tmpdir);
+          cmd = targets[opts.targetMode].cmd(block, tempFile, opts.tmpdir, params);
           debug(cmd);
           return exec(cmd, {
             async: true,

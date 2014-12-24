@@ -116,7 +116,7 @@ replace-handler-gen = (tmpdir, target-mode, code-block, offset, string, done) --
             if targets[opts.target-mode]?
                 debug "Si puo' fare!"
                 temp-file = uid(7)
-                cmd = targets[opts.target-mode].cmd(block, temp-file, opts.tmpdir)
+                cmd = targets[opts.target-mode].cmd(block, temp-file, opts.tmpdir, params)
                 debug cmd
                 exec cmd, {+async, +silent}, (code, output) ->
                     output = targets[opts.target-mode].output(temp-file, opts.tmpdir, output)
