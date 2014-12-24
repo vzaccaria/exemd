@@ -25,7 +25,7 @@
     targetMode = 'html,png';
   } else {
     if (o['--raw'] || o['-r']) {
-      targetMode = 'raw';
+      targetMode = 'raw,png';
     } else {
       targetMode = 'html';
     }

@@ -42,7 +42,7 @@ if o['-g'] or o['--force-png']
     target-mode = 'html,png'
 else
     if o['--raw'] or o['-r']
-        target-mode = 'raw'
+        target-mode = 'raw,png'
     else 
         target-mode = 'html'
 
