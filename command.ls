@@ -15,12 +15,13 @@ require! 'fs'
 
 doc = """
 Usage:
-    exemd FILE [ -r | --raw ] [ -g | --force-png ]
+    exemd FILE [ -r | --raw ] [ -g | --force-png ] [ -p | --pdf ]
     exemd -h | --help 
 
 Options:
     -g, --force-png     Force png generation
     -r, --raw           Unfold and execute blocks, generate raw markdown
+    -p, --pdf           Generate raw markdown with external figures, to be proc. with latex 
     -h, --help  
 
 Arguments: 
@@ -44,7 +45,10 @@ else
     if o['--raw'] or o['-r']
         target-mode = 'raw,png'
     else 
-        target-mode = 'html'
+        if o['-p'] or o['--pdf']
+            target-mode = 'raw,pdf'
+        else 
+            target-mode = 'html'
 
 FILE = o['FILE']
 
