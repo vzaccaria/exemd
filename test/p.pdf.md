@@ -6,5 +6,6 @@ Ditaa is:
 
 Here we are using the [`exemd-ditaa`](https://www.npmjs.org/package/exemd-dot) plugin to produce a base64-encoded inlined image taken from the project front page:
 
-![](/Users/zaccaria/development/github/exemd/figures/f-ascidia-0.png)
+![](/Users/zaccaria/development/github/exemd/figures/f-ascidia-0.pdf
+)
 
