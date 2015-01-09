@@ -1,8 +1,9 @@
-
 test.html
-
 exemd/assets/example.html
-
 exemd/assets/usage.html
-
 exemd/assets/npm-debug.log
+figures
+test/test0/dest.html
+test/test1/dest.html
+test/test2/dest.html
+test/test3/dest.md
