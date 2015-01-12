@@ -75,7 +75,7 @@
       process = require(modulePath + "exemd-" + language).process;
     } catch (e$) {
       e = e$;
-      debug("uff.. exception");
+      debug("uff..: " + e);
       done(codeBlock);
       return;
     }
@@ -94,8 +94,9 @@
         debug(targets);
         debug(opts.targetMode);
         if (targets[opts.targetMode] != null) {
-          debug("Si puo' fare!");
           tempFile = uid(7);
+          debug("Target mode: " + opts.targetMode);
+          debug(targets);
           cmd = targets[opts.targetMode].cmd(block, tempFile, opts.tmpdir, params);
           debug(cmd);
           return exec(cmd, {

@@ -92,8 +92,8 @@ replace-handler-gen = (tmpdir, target-mode, code-block, offset, string, done) --
         debug "Trying language #language"
         debug "Original code #block"
         process := require("#{module-path}exemd-#{language}").process
-    catch 
-        debug "uff.. exception"
+    catch e
+        debug "uff..: #e"
         done(code-block)
         return
 
@@ -114,8 +114,9 @@ replace-handler-gen = (tmpdir, target-mode, code-block, offset, string, done) --
             debug targets
             debug opts.target-mode
             if targets[opts.target-mode]?
-                debug "Si puo' fare!"
                 temp-file = uid(7)
+                debug "Target mode: #{opts.target-mode}"
+                debug targets
                 cmd = targets[opts.target-mode].cmd(block, temp-file, opts.tmpdir, params)
                 debug cmd
                 exec cmd, {+async, +silent}, (code, output) ->
