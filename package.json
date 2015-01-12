@@ -20,15 +20,16 @@
   "license": "BSD",
   "usage": "",
   "dependencies": {
-    "docopt": "~0.4.1",
-    "verbal-expressions": "~0.1.2",
-    "uid": "0.0.2",
     "async-replace": "~1.0.0",
     "bluebird": "~2.3.11",
+    "debug": "~2.1.0",
+    "diff-files": "0.0.2",
+    "docopt": "~0.4.1",
     "lodash": "~2.4.1",
     "shelljs": "~0.3.0",
-    "diff-files": "0.0.2",
-    "debug": "~2.1.0",
-    "underscore.string": "~2.4.0"
+    "uid": "0.0.2",
+    "underscore.string": "~2.4.0",
+    "verbal-expressions": "~0.1.2",
+    "xyz": "^0.5.0"
   }
 }
