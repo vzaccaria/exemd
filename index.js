@@ -89,30 +89,36 @@
       params == null && (params = opts.params);
       params == null && (params = '');
       return new Promise(function(resolve, preject){
-        var tempFile, cmd;
+        var tempFile, cmd, e;
         debug("Running template");
         debug(targets);
         debug(opts.targetMode);
-        if (targets[opts.targetMode] != null) {
-          tempFile = uid(7);
-          debug("Target mode: " + opts.targetMode);
-          debug(targets);
-          cmd = targets[opts.targetMode].cmd(block, tempFile, opts.tmpdir, params);
-          debug(cmd);
-          return exec(cmd, {
-            async: true,
-            silent: true
-          }, function(code, output){
-            output = targets[opts.targetMode].output(tempFile, opts.tmpdir, output);
-            debug(output);
-            if (!code) {
-              return resolve(output);
-            } else {
-              return resolve("```" + block + "```");
-            }
-          });
-        } else {
-          return resolve("```" + block + "```");
+        try {
+          if (targets[opts.targetMode] != null) {
+            tempFile = uid(7);
+            debug("Target mode: " + opts.targetMode);
+            debug(targets);
+            cmd = targets[opts.targetMode].cmd(block, tempFile, opts.tmpdir, params);
+            debug(cmd);
+            return exec(cmd, {
+              async: true,
+              silent: true
+            }, function(code, output){
+              output = targets[opts.targetMode].output(tempFile, opts.tmpdir, output);
+              debug(output);
+              if (!code) {
+                return resolve(output);
+              } else {
+                return resolve("```" + block + "```");
+              }
+            });
+          } else {
+            return resolve("```" + block + "```");
+          }
+        } catch (e$) {
+          e = e$;
+          debug("Error: " + e);
+          return resolve("```Error processing exemd: " + e + "```");
         }
       });
     };

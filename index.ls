@@ -58,7 +58,7 @@ get-header = (string) ->
 
     mtch = header.exec(string)
     if mtch?
-        return { language: mtch[1], params: mtch[2]} 
+        return { language: mtch[1], params: mtch[2]}
     else
         return undefined
 
@@ -84,11 +84,11 @@ replace-handler-gen = (tmpdir, target-mode, code-block, offset, string, done) --
 
     if not block-res?
         done(null, code-block)
-        return 
+        return
     else
         { block } := block-res
 
-    try 
+    try
         debug "Trying language #language"
         debug "Original code #block"
         process := require("#{module-path}exemd-#{language}").process
@@ -113,21 +113,25 @@ replace-handler-gen = (tmpdir, target-mode, code-block, offset, string, done) --
             debug "Running template"
             debug targets
             debug opts.target-mode
-            if targets[opts.target-mode]?
-                temp-file = uid(7)
-                debug "Target mode: #{opts.target-mode}"
-                debug targets
-                cmd = targets[opts.target-mode].cmd(block, temp-file, opts.tmpdir, params)
-                debug cmd
-                exec cmd, {+async, +silent}, (code, output) ->
-                    output = targets[opts.target-mode].output(temp-file, opts.tmpdir, output)
-                    debug output
-                    if not code
-                        resolve(output)
-                    else
-                        resolve("```#block```")
-            else
-                resolve("```#block```")
+            try
+              if targets[opts.target-mode]?
+                  temp-file = uid(7)
+                  debug "Target mode: #{opts.target-mode}"
+                  debug targets
+                  cmd = targets[opts.target-mode].cmd(block, temp-file, opts.tmpdir, params)
+                  debug cmd
+                  exec cmd, {+async, +silent}, (code, output) ->
+                      output = targets[opts.target-mode].output(temp-file, opts.tmpdir, output)
+                      debug output
+                      if not code
+                          resolve(output)
+                      else
+                          resolve("```#block```")
+              else
+                  resolve("```#block```")
+            catch e
+                debug "Error: #e"
+                resolve("```Error processing exemd: #e```")
 
     opts.plugin-template = plugin-template
 
@@ -148,7 +152,7 @@ code-block = v().then("```")
 
 
 code-regex = code-block
-                
+
 
 
 match-array = []
@@ -192,7 +196,7 @@ _module = ->
         final-src   ?= 'html'
 
         tmpdir = prepare!
-    
+
         # debug JSON.stringify(code-regex, 0, 4)
         # debug JSON.stringify(header, 0, 4)
         # debug JSON.stringify(block, 0, 4)
@@ -202,10 +206,10 @@ _module = ->
                 rm('-rf', tmpdir)
                 return it
             else
-                if final-src == 'html' 
+                if final-src == 'html'
                     tmp-markdown = "#{tmpdir}/#{uid(7)}.md"
                     it.to(tmp-markdown)
-                    
+
                     return new Promise (res, rej) ->
                         exec "pandoc -s #tmp-markdown", {+async, +silent}, (code, output) ->
                             rm('-rf', tmpdir)
