@@ -7,18 +7,28 @@ It is a markdown pre-processor that runs code inside *code blocks*, by pasting t
 ## Usage
 
   Usage:
-      exemd FILE [ -r | --raw ] [ -g | --force-png ] [ -p | --pdf ]
-      exemd -h | --help
+      exemd FILE [ -r | --raw ] [ -g | --force-png ] [ -p | --pdf ]  
+      exemd -h | --help  
 
-  Options:
-      -g, --force-png     Generate html+png(inline). Default is html+svg(inline).
-      -r, --raw           Generates md+png(inline).
-      -p, --pdf           Generates md+pdf(external). Can be used by pandoc to generate pdf docs.
-      -h, --help
+  Options:  
+        -g, --force-png     Generate html+png(inline). Default is html+svg(inline).  
+        -r, --raw           Generates md+png(inline).  
+        -p, --pdf           Generates md+pdf(external). Can be used by pandoc to generate pdf docs.  
+        -h, --help  
 
-  Arguments:
-      FILE       markdown file name.
+  Arguments:  
+      FILE       markdown file name.  
 
+## News
+
+It supports `pdf` now (March 2015). Stay tuned for other goodies coming in.
+
+## Available plugins:
+
+* `exemd-dot`       (Graphviz dot)
+* `exemd-ascidia`   (Ascidia)
+* `exemd-ditaa`     (Ditaa plugins)
+* `exemd-pn`        (Petri nets)
 
 ## Defaults
 
@@ -61,6 +71,6 @@ Each plugin should export a `process(block, opts)` function, where:
 
     - `tmpdir` an already setup temporary directory where the plugin can mess around but not delete.
     - `params` the string following the bang (`!`) in the block declaration
-    - `target-mode` it can be either `html`, `pdf`, or `raw` (however, pdf is not supported now)
+    - `target-mode` it can be either `html`, `pdf`, or `raw`
 
 The `process` function should return the markdown text to replace the original block either directly or through a promise.
