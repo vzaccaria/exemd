@@ -16,16 +16,17 @@ require! 'fs'
 doc = """
 Usage:
     exemd FILE [ -r | --raw ] [ -g | --force-png ] [ -p | --pdf ]
-    exemd -h | --help 
+    exemd -h | --help
 
 Options:
-    -g, --force-png     Force png generation
-    -r, --raw           Unfold and execute blocks, generate raw markdown
-    -p, --pdf           Generate raw markdown with external figures, to be proc. with latex 
-    -h, --help  
+    -g, --force-png     Generate html+png(inline). Default is html+svg(inline).
+    -r, --raw           Generate md+png(inline).
+    -p, --pdf           Generate md+pdf(external). Output can be used by pandoc to generate pdf docs.
+    -h, --help
 
-Arguments: 
+Arguments:
     FILE       markdown file name.
+
 
 """
 
@@ -39,15 +40,15 @@ get-option = (a, b, def, o) ->
 
 o = docopt(doc)
 
-if o['-g'] or o['--force-png'] 
+if o['-g'] or o['--force-png']
     target-mode = 'html,png'
 else
     if o['--raw'] or o['-r']
         target-mode = 'raw,png'
-    else 
+    else
         if o['-p'] or o['--pdf']
             target-mode = 'raw,pdf'
-        else 
+        else
             target-mode = 'html'
 
 FILE = o['FILE']
@@ -57,10 +58,3 @@ text = cat(FILE)
 
 process(target-mode, text).then ->
     console.log it
-
-
-
-
-
-
-

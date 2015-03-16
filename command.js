@@ -12,7 +12,7 @@
   process = require('./index').process;
   modulePath = "";
   fs = require('fs');
-  doc = "Usage:\n    exemd FILE [ -r | --raw ] [ -g | --force-png ] [ -p | --pdf ]\n    exemd -h | --help \n\nOptions:\n    -g, --force-png     Force png generation\n    -r, --raw           Unfold and execute blocks, generate raw markdown\n    -p, --pdf           Generate raw markdown with external figures, to be proc. with latex \n    -h, --help  \n\nArguments: \n    FILE       markdown file name.\n";
+  doc = "Usage:\n    exemd FILE [ -r | --raw ] [ -g | --force-png ] [ -p | --pdf ]\n    exemd -h | --help\n\nOptions:\n    -g, --force-png     Generate html+png(inline). Default is html+svg(inline).\n    -r, --raw           Generate md+png(inline).\n    -p, --pdf           Generate md+pdf(external). Output can be used by pandoc to generate pdf docs.\n    -h, --help\n\nArguments:\n    FILE       markdown file name.\n\n";
   getOption = function(a, b, def, o){
     if (!o[a] && !o[b]) {
       return def;

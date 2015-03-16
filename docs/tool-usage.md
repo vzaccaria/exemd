@@ -1,25 +1,28 @@
 
 ## What is it
 
-It is a markdown pre-processor that runs code inside *code blocks*, by pasting the output back into the original document. It can produce either processed markdown (with inlined SVG or base64 encoded png) or HTML. 
+It is a markdown pre-processor that runs code inside *code blocks*, by pasting the output back into the original document. It can produce either processed markdown (with inlined SVG or base64 encoded png) or HTML.
 
 
 ## Usage
 
-    exemd FILE [ -r | --raw ] 
-    exemd -h | --help 
+  Usage:
+      exemd FILE [ -r | --raw ] [ -g | --force-png ] [ -p | --pdf ]
+      exemd -h | --help
 
-    Options:
-        -g, --force-png     Force png generation
-        -r, --raw           Unfold and execute blocks, generate raw markdown
-        -h, --help  
+  Options:
+      -g, --force-png     Generate html+png(inline). Default is html+svg(inline).
+      -r, --raw           Generates md+png(inline).
+      -p, --pdf           Generates md+pdf(external). Can be used by pandoc to generate pdf docs.
+      -h, --help
 
-    Arguments: 
-        FILE       markdown file name.
+  Arguments:
+      FILE       markdown file name.
+
 
 ## Defaults
 
-By default, `exemd` invokes `pandoc` to generate html. If you use `--raw` you will get a raw markdown with expanded blocks. 
+By default, `exemd` invokes `pandoc` to generate html with inlined svg. To get raw markdown, use `--raw` or `--pdf`.
 
 ## Syntax
 
@@ -47,11 +50,11 @@ Depending on the plugin, you can also pass parameters (just as in org-mode)
 
     ```
 
-## Plugins 
+## Plugins
 
 Look for npm modules prefixed with `exemd`. I wrote only `exemd-dot` and `exemd-ditaa` for diagrams. Feel free to provide plugins for R (like `kintr`) or other languages.
 
-Each plugin should export a `process(block, opts)` function, where: 
+Each plugin should export a `process(block, opts)` function, where:
 
 * `block` is the string representing the inner part of the block code
 * `opts` is an object with the following properties:
@@ -60,8 +63,4 @@ Each plugin should export a `process(block, opts)` function, where:
     - `params` the string following the bang (`!`) in the block declaration
     - `target-mode` it can be either `html`, `pdf`, or `raw` (however, pdf is not supported now)
 
-The `process` function should return the markdown text to replace the original block either directly or through a promise. 
-
-
-
-
+The `process` function should return the markdown text to replace the original block either directly or through a promise.
