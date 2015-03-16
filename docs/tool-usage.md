@@ -30,6 +30,8 @@ It supports `pdf` now (March 2015). Stay tuned for other goodies coming in.
 * `exemd-ditaa`     (Ditaa plugins)
 * `exemd-pn`        (Petri nets)
 
+Look [here](http://www.vittoriozaccaria.net/exemd/) for examples.
+
 ## Defaults
 
 By default, `exemd` invokes `pandoc` to generate html with inlined svg. To get raw markdown, use `--raw` or `--pdf`.
