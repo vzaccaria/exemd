@@ -6,36 +6,36 @@
 .DEFAULT_GOAL := all
 
 
-.PHONY: c-ihk1f1hw
-c-ihk1f1hw: command.js index.js
+.PHONY: c-fv0najgh
+c-fv0najgh: command.js index.js
 
 
 .PHONY: build
-build: c-ihk1f1hw
+build: c-fv0najgh
 
 
 .PHONY: docs
-docs: k-vgpngyn6
+docs: k-9sur3gj0
 
 
 .PHONY: test
-test: k-xjyo5gol
+test: k-8xeqbjkg
 
 
 .PHONY: up
-up: k-us8r77x5
+up: k-xn1vlpc0
 
 
 .PHONY: major
-major: k-vyb8xx3x k-no4myyp0
+major: k-2r6e0yeo k-n8p9qckv k-pcfnudjh
 
 
 .PHONY: minor
-minor: k-4ejl4g1o k-abmhqq0t
+minor: k-tnanvr1m k-eofngwwt k-7n07wlr6
 
 
 .PHONY: patch
-patch: k-47oi0dfa k-p8c19oes
+patch: k-9b27l9lk k-r7sruard k-36s4066q
 
 
 .PHONY: prepare
@@ -44,65 +44,80 @@ prepare: .
 
 
 
-.PHONY: k-wcf09dvk
-k-wcf09dvk:  
+.PHONY: k-w5665s2t
+k-w5665s2t:  
 	((echo '#!/usr/bin/env node') && cat command.js) > cli.js
 
 
-.PHONY: k-vbagy0ge
-k-vbagy0ge:  
+.PHONY: k-o5rxyt3h
+k-o5rxyt3h:  
 	chmod +x ./cli.js
 
 
 .PHONY: all
 all: 
 	make build 
-	make k-wcf09dvk 
-	make k-vbagy0ge  
+	make k-w5665s2t 
+	make k-o5rxyt3h  
 
 
-.PHONY: k-vgpngyn6
-k-vgpngyn6:  
+.PHONY: k-9sur3gj0
+k-9sur3gj0:  
 	./node_modules/.bin/verb
 
 
-.PHONY: k-xjyo5gol
-k-xjyo5gol:  
+.PHONY: k-8xeqbjkg
+k-8xeqbjkg:  
 	./test/test.sh
 
 
-.PHONY: k-us8r77x5
-k-us8r77x5:  
+.PHONY: k-xn1vlpc0
+k-xn1vlpc0:  
 	make clean && ./node_modules/.bin/babel configure.js | node
 
 
-.PHONY: k-vyb8xx3x
-k-vyb8xx3x:  
+.PHONY: k-2r6e0yeo
+k-2r6e0yeo:  
 	make all
 
 
-.PHONY: k-no4myyp0
-k-no4myyp0:  
+.PHONY: k-n8p9qckv
+k-n8p9qckv:  
+	make docs
+
+
+.PHONY: k-pcfnudjh
+k-pcfnudjh:  
 	./node_modules/.bin/xyz -i major
 
 
-.PHONY: k-4ejl4g1o
-k-4ejl4g1o:  
+.PHONY: k-tnanvr1m
+k-tnanvr1m:  
 	make all
 
 
-.PHONY: k-abmhqq0t
-k-abmhqq0t:  
+.PHONY: k-eofngwwt
+k-eofngwwt:  
+	make docs
+
+
+.PHONY: k-7n07wlr6
+k-7n07wlr6:  
 	./node_modules/.bin/xyz -i minor
 
 
-.PHONY: k-47oi0dfa
-k-47oi0dfa:  
+.PHONY: k-9b27l9lk
+k-9b27l9lk:  
 	make all
 
 
-.PHONY: k-p8c19oes
-k-p8c19oes:  
+.PHONY: k-r7sruard
+k-r7sruard:  
+	make docs
+
+
+.PHONY: k-36s4066q
+k-36s4066q:  
 	./node_modules/.bin/xyz -i patch
 
 

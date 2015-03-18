@@ -11,6 +11,6 @@ Options:
 
 Commands:
     list                List available plugins
-    
+
 Arguments:
-    FILE       markdown file name.
+    FILE                markdown file name.
