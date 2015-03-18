@@ -9,6 +9,23 @@
 npm i -g exemd
 ```
 
+## Usage
+
+```
+Usage:
+    exemd FILE [ -r | --raw ] [ -g | --force-png ] [ -p | --pdf ]
+    exemd -h | --help
+
+Options:
+    -g, --force-png     Generate html+png(inline). Default is html+svg(inline).
+    -r, --raw           Generate md+png(inline).
+    -p, --pdf           Generate md+pdf(external). Output can be used by pandoc to generate pdf docs.
+    -h, --help
+
+Arguments:
+    FILE       markdown file name.
+
+```
 
 ## What is it
 

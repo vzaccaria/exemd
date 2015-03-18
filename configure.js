@@ -6,12 +6,14 @@ generateProject(_ => {
   _.collectSeq("all", _ => {
     _.collect("build", _ => {
       _.livescript("*.ls")
-      _.collect("docs", _ => {
-        _.cmd("./node_modules/.bin/verb", "docs/*.md")
-      })
+
     })
     _.cmd("((echo '#!/usr/bin/env node') && cat command.js) > cli.js", "command.js")
     _.cmd("chmod +x ./cli.js", "cli.js")
+  })
+
+  _.collect("docs", _ => {
+    _.cmd("./node_modules/.bin/verb", "docs/*.md")
   })
 
   _.collect("test", _ => {

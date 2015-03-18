@@ -6,36 +6,36 @@
 .DEFAULT_GOAL := all
 
 
-.PHONY: c-laq5j643
-c-laq5j643: command.js index.js
-
-
-.PHONY: docs
-docs: k-wewkw3tk
+.PHONY: c-3c79ev81
+c-3c79ev81: command.js index.js
 
 
 .PHONY: build
-build: c-laq5j643 docs
+build: c-3c79ev81
+
+
+.PHONY: docs
+docs: k-jc0qe6un
 
 
 .PHONY: test
-test: k-tptik4k2
+test: k-h8r7shtb
 
 
 .PHONY: up
-up: k-tcqym7h4
+up: k-yfpayvtf
 
 
 .PHONY: major
-major: k-a7q2a6jp
+major: k-0h0rw9wp
 
 
 .PHONY: minor
-minor: k-t93ndoq3
+minor: k-5ueqvcla
 
 
 .PHONY: patch
-patch: k-6fk61fu6
+patch: k-mr3i29nk
 
 
 .PHONY: prepare
@@ -44,50 +44,50 @@ prepare: .
 
 
 
-.PHONY: k-wewkw3tk
-k-wewkw3tk:  
-	./node_modules/.bin/verb
-
-
-.PHONY: k-7c6ruvdj
-k-7c6ruvdj:  
+.PHONY: k-a7wawriy
+k-a7wawriy:  
 	((echo '#!/usr/bin/env node') && cat command.js) > cli.js
 
 
-.PHONY: k-67fs0utd
-k-67fs0utd:  
+.PHONY: k-4tasrn4k
+k-4tasrn4k:  
 	chmod +x ./cli.js
 
 
 .PHONY: all
 all: 
 	make build 
-	make k-7c6ruvdj 
-	make k-67fs0utd  
+	make k-a7wawriy 
+	make k-4tasrn4k  
 
 
-.PHONY: k-tptik4k2
-k-tptik4k2:  
+.PHONY: k-jc0qe6un
+k-jc0qe6un:  
+	./node_modules/.bin/verb
+
+
+.PHONY: k-h8r7shtb
+k-h8r7shtb:  
 	./test/test.sh
 
 
-.PHONY: k-tcqym7h4
-k-tcqym7h4:  
+.PHONY: k-yfpayvtf
+k-yfpayvtf:  
 	make clean && ./node_modules/.bin/babel configure.js | node
 
 
-.PHONY: k-a7q2a6jp
-k-a7q2a6jp:  
+.PHONY: k-0h0rw9wp
+k-0h0rw9wp:  
 	./node_modules/.bin/xyz -i major
 
 
-.PHONY: k-t93ndoq3
-k-t93ndoq3:  
+.PHONY: k-5ueqvcla
+k-5ueqvcla:  
 	./node_modules/.bin/xyz -i minor
 
 
-.PHONY: k-6fk61fu6
-k-6fk61fu6:  
+.PHONY: k-mr3i29nk
+k-mr3i29nk:  
 	./node_modules/.bin/xyz -i patch
 
 

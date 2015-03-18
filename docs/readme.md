@@ -5,7 +5,12 @@
 
 {%= include("install-global") %}
 
+## Usage
+
+```
 {%= partial("usage.md") %}
+```
+
 {%= partial("description.md") %}
 
 ## Author
