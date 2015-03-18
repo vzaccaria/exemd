@@ -14,7 +14,8 @@
 {%= partial("description.md") %}
 
 ## Author
-{%= include("author") %}
+
+* Vittorio Zaccaria
 
 ## License
 {%= copyright() %}

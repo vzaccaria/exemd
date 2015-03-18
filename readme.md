@@ -25,9 +25,9 @@ Options:
 
 Commands:
     list                List available plugins
-    
+
 Arguments:
-    FILE       markdown file name.
+    FILE                markdown file name.
 
 ```
 
@@ -96,10 +96,7 @@ The `process` function should return the markdown text to replace the original b
 
 ## Author
 
-**Vittorio Zaccaria**
- 
-+ [github/vzaccaria](https://github.com/vzaccaria)
-+ [twitter/vzaccaria](http://twitter.com/vzaccaria) 
+* Vittorio Zaccaria
 
 ## License
 Copyright (c) 2015 Vittorio Zaccaria  
