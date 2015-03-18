@@ -6,36 +6,36 @@
 .DEFAULT_GOAL := all
 
 
-.PHONY: c-3c79ev81
-c-3c79ev81: command.js index.js
+.PHONY: c-ihk1f1hw
+c-ihk1f1hw: command.js index.js
 
 
 .PHONY: build
-build: c-3c79ev81
+build: c-ihk1f1hw
 
 
 .PHONY: docs
-docs: k-jc0qe6un
+docs: k-vgpngyn6
 
 
 .PHONY: test
-test: k-h8r7shtb
+test: k-xjyo5gol
 
 
 .PHONY: up
-up: k-yfpayvtf
+up: k-us8r77x5
 
 
 .PHONY: major
-major: k-0h0rw9wp
+major: k-vyb8xx3x k-no4myyp0
 
 
 .PHONY: minor
-minor: k-5ueqvcla
+minor: k-4ejl4g1o k-abmhqq0t
 
 
 .PHONY: patch
-patch: k-mr3i29nk
+patch: k-47oi0dfa k-p8c19oes
 
 
 .PHONY: prepare
@@ -44,50 +44,65 @@ prepare: .
 
 
 
-.PHONY: k-a7wawriy
-k-a7wawriy:  
+.PHONY: k-wcf09dvk
+k-wcf09dvk:  
 	((echo '#!/usr/bin/env node') && cat command.js) > cli.js
 
 
-.PHONY: k-4tasrn4k
-k-4tasrn4k:  
+.PHONY: k-vbagy0ge
+k-vbagy0ge:  
 	chmod +x ./cli.js
 
 
 .PHONY: all
 all: 
 	make build 
-	make k-a7wawriy 
-	make k-4tasrn4k  
+	make k-wcf09dvk 
+	make k-vbagy0ge  
 
 
-.PHONY: k-jc0qe6un
-k-jc0qe6un:  
+.PHONY: k-vgpngyn6
+k-vgpngyn6:  
 	./node_modules/.bin/verb
 
 
-.PHONY: k-h8r7shtb
-k-h8r7shtb:  
+.PHONY: k-xjyo5gol
+k-xjyo5gol:  
 	./test/test.sh
 
 
-.PHONY: k-yfpayvtf
-k-yfpayvtf:  
+.PHONY: k-us8r77x5
+k-us8r77x5:  
 	make clean && ./node_modules/.bin/babel configure.js | node
 
 
-.PHONY: k-0h0rw9wp
-k-0h0rw9wp:  
+.PHONY: k-vyb8xx3x
+k-vyb8xx3x:  
+	make all
+
+
+.PHONY: k-no4myyp0
+k-no4myyp0:  
 	./node_modules/.bin/xyz -i major
 
 
-.PHONY: k-5ueqvcla
-k-5ueqvcla:  
+.PHONY: k-4ejl4g1o
+k-4ejl4g1o:  
+	make all
+
+
+.PHONY: k-abmhqq0t
+k-abmhqq0t:  
 	./node_modules/.bin/xyz -i minor
 
 
-.PHONY: k-mr3i29nk
-k-mr3i29nk:  
+.PHONY: k-47oi0dfa
+k-47oi0dfa:  
+	make all
+
+
+.PHONY: k-p8c19oes
+k-p8c19oes:  
 	./node_modules/.bin/xyz -i patch
 
 
