@@ -55,6 +55,11 @@ parse ->
 
         @toDir d(""), { strip: s("") }, ->
             @copy s("/example.md")
+
+        @collect "update-docs", -> [
+                    @cmd "../cli.js -g ./assets/example.md > ./assets/example.html"
+                    @cmd "cat ../docs/usage.md ../docs/description.md | pandoc > ./assets/usage.html"
+                    ]
         ]
 
     @collect "deploy", ->
@@ -62,10 +67,7 @@ parse ->
             @make "all"
             @cmd "blog-ftp-cli -l #name -r #baseUrl"
             ]
-    @collect "update-docs", -> [
-            @cmd "../cli.js -g ./assets/example.md > ./assets/example.html"
-            @cmd "cat ../docs/usage.md ../docs/description.md | pandoc > ./assets/usage.html"
-            ]
+
 
     @collect "complete", ->
         @command-seq -> [

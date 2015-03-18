@@ -28,35 +28,35 @@ _site/example.md: .build/3-example.md
 	@mkdir -p _site/
 	cp .build/3-example.md $@
 
-.PHONY : all
-all: _site/css/client.css _site/index.html _site/js/client.js _site/example.md
-
 .PHONY : cmd-4
 cmd-4: 
-	make all
+	../cli.js -g ./assets/example.md > ./assets/example.html
 
 .PHONY : cmd-5
 cmd-5: 
-	blog-ftp-cli -l _site -r /exemd
-
-.PHONY : cmd-seq-6
-cmd-seq-6: 
-	make cmd-4
-	make cmd-5
-
-.PHONY : deploy
-deploy: cmd-seq-6
-
-.PHONY : cmd-7
-cmd-7: 
-	../cli.js -g ./assets/example.md > ./assets/example.html
-
-.PHONY : cmd-8
-cmd-8: 
 	cat ../docs/usage.md ../docs/description.md | pandoc > ./assets/usage.html
 
 .PHONY : update-docs
-update-docs: cmd-7 cmd-8
+update-docs: cmd-4 cmd-5
+
+.PHONY : all
+all: _site/css/client.css _site/index.html _site/js/client.js _site/example.md update-docs
+
+.PHONY : cmd-6
+cmd-6: 
+	make all
+
+.PHONY : cmd-7
+cmd-7: 
+	blog-ftp-cli -l _site -r /exemd
+
+.PHONY : cmd-seq-8
+cmd-seq-8: 
+	make cmd-6
+	make cmd-7
+
+.PHONY : deploy
+deploy: cmd-seq-8
 
 .PHONY : cmd-9
 cmd-9: 
