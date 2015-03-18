@@ -1,4 +1,4 @@
-#!/usr/bin/env sh 
+#!/usr/bin/env sh
 set -e
 
 # Source directory
@@ -10,5 +10,5 @@ dstdir=`pwd`
 bindir=$srcdir/../..
 npm=$srcdir/../../node_modules/.bin
 
-cd $srcdir && $bindir/command.js -p $srcdir/source.md > $srcdir/dest.md
+cd $srcdir && $bindir/cli.js -p $srcdir/source.md > $srcdir/dest.md
 $npm/diff-files $srcdir/dest.md $srcdir/ref.md -m "Test pdf md 1."

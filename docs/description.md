@@ -3,22 +3,6 @@
 
 It is a markdown pre-processor that runs code inside *code blocks*, by pasting the output back into the original document. It can produce either processed markdown (with inlined SVG or base64 encoded png) or HTML.
 
-
-## Usage
-
-  Usage:
-      exemd FILE [ -r | --raw ] [ -g | --force-png ] [ -p | --pdf ]  
-      exemd -h | --help  
-
-  Options:  
-        -g, --force-png     Generate html+png(inline). Default is html+svg(inline).  
-        -r, --raw           Generates md+png(inline).  
-        -p, --pdf           Generates md+pdf(external). Can be used by pandoc to generate pdf docs.  
-        -h, --help  
-
-  Arguments:  
-      FILE       markdown file name.  
-
 ## News
 
 It supports `pdf` now (March 2015). Stay tuned for other goodies coming in.

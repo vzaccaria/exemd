@@ -5,7 +5,8 @@
 
 {%= include("install-global") %}
 
-{%= partial("tool-usage.md") %}
+{%= partial("usage.md") %}
+{%= partial("description.md") %}
 
 ## Author
 {%= include("author") %}

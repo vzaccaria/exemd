@@ -3,7 +3,7 @@
   "version": "0.1.5",
   "description": "Pre-process markdown code blocks with external tools to produce html. Because we want to do everything with markdown right? ",
   "bin": {
-    "exemd": "./command.js"
+    "exemd": "./cli.js"
   },
   "main": "./index.js",
   "scripts": {
@@ -16,6 +16,10 @@
     "code",
     "execute"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vzaccaria/exemd"
+  },
   "author": "Vittorio Zaccaria",
   "license": "BSD",
   "usage": "",

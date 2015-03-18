@@ -1,4 +1,4 @@
-#!/usr/bin/env sh 
+#!/usr/bin/env sh
 set -e
 
 # Source directory
@@ -10,5 +10,5 @@ dstdir=`pwd`
 bindir=$srcdir/../..
 npm=$srcdir/../../node_modules/.bin
 
-$bindir/command.js $srcdir/source.md > $srcdir/dest.html 
+$bindir/cli.js $srcdir/source.md > $srcdir/dest.html 
 $npm/diff-files $srcdir/dest.html $srcdir/ref.html -m "Test html 1."
