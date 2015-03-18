@@ -49,11 +49,11 @@ deploy: cmd-seq-6
 
 .PHONY : cmd-7
 cmd-7: 
-	../command.js -g ./assets/example.md > ./assets/example.html
+	../cli.js -g ./assets/example.md > ./assets/example.html
 
 .PHONY : cmd-8
 cmd-8: 
-	pandoc ../docs/tool-usage.md > ./assets/usage.html
+	cat ../docs/usage.md ../docs/description.md | pandoc > ./assets/usage.html
 
 .PHONY : update-docs
 update-docs: cmd-7 cmd-8

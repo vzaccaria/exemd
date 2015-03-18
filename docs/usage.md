@@ -10,7 +10,7 @@ Options:
     -h, --help
 
 Commands:
-    list                List available plugins with information
-
+    list                List available plugins
+    
 Arguments:
     FILE       markdown file name.

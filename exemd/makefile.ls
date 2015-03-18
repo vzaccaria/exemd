@@ -1,4 +1,4 @@
-#!/usr/bin/env lsc 
+#!/usr/bin/env lsc
 
 { parse, add-plugin } = require('newmake')
 
@@ -24,8 +24,8 @@ parse ->
         jade = ->
             "jade -O ./site.json -P -p #{it.orig-complete} | beml-cli "
 
-        cmd = -> 
-            ops = 
+        cmd = ->
+            ops =
                 "cat #{it.orig-complete} "
                 jade(it)
                 substitute('./assets/example.html', '{{include}}')
@@ -34,7 +34,7 @@ parse ->
 
         @compile-files( cmd, ".html", g, deps )
 
-    @notifyStrip destination-dir 
+    @notifyStrip destination-dir
 
     @serveRoot './_site'
 
@@ -57,14 +57,14 @@ parse ->
             @copy s("/example.md")
         ]
 
-    @collect "deploy", -> 
+    @collect "deploy", ->
         @command-seq -> [
             @make "all"
             @cmd "blog-ftp-cli -l #name -r #baseUrl"
             ]
     @collect "update-docs", -> [
-            @cmd "../command.js -g ./assets/example.md > ./assets/example.html"
-            @cmd "pandoc ../docs/tool-usage.md > ./assets/usage.html"
+            @cmd "../cli.js -g ./assets/example.md > ./assets/example.html"
+            @cmd "cat ../docs/usage.md ../docs/description.md | pandoc > ./assets/usage.html"
             ]
 
     @collect "complete", ->
@@ -77,8 +77,3 @@ parse ->
         @remove-all-targets()
         @cmd "rm -rf #name"
     ]
-
-
-
-        
-
