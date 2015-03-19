@@ -34,7 +34,7 @@ cmd-4:
 
 .PHONY : cmd-5
 cmd-5: 
-	cat ../docs/usage.md ../docs/description.md | pandoc > ./assets/usage.html
+	(echo "\`\`\`" && cat ../docs/usage.md && echo "\`\`\`" && cat ../docs/description.md) | pandoc > ./assets/usage.html
 
 .PHONY : update-docs
 update-docs: cmd-4 cmd-5
@@ -44,51 +44,40 @@ all: _site/css/client.css _site/index.html _site/js/client.js _site/example.md u
 
 .PHONY : cmd-6
 cmd-6: 
-	make all
+	make update-docs
 
 .PHONY : cmd-7
 cmd-7: 
-	blog-ftp-cli -l _site -r /exemd
-
-.PHONY : cmd-seq-8
-cmd-seq-8: 
-	make cmd-6
-	make cmd-7
-
-.PHONY : deploy
-deploy: cmd-seq-8
-
-.PHONY : cmd-9
-cmd-9: 
-	make update-docs
-
-.PHONY : cmd-10
-cmd-10: 
 	make all
 
-.PHONY : cmd-seq-11
-cmd-seq-11: 
-	make cmd-9
-	make cmd-10
+.PHONY : cmd-8
+cmd-8: 
+	blog-ftp-cli -l _site -r /exemd
 
-.PHONY : complete
-complete: cmd-seq-11
+.PHONY : cmd-seq-9
+cmd-seq-9: 
+	make cmd-6
+	make cmd-7
+	make cmd-8
+
+.PHONY : deploy
+deploy: cmd-seq-9
+
+.PHONY : clean-10
+clean-10: 
+	rm -rf .build/0-client.css _site/css/client.css .build/1-index.html _site/index.html .build/2-client.js _site/js/client.js .build/3-example.md _site/example.md
+
+.PHONY : clean-11
+clean-11: 
+	rm -rf .build
 
 .PHONY : clean-12
 clean-12: 
-	rm -rf .build/0-client.css _site/css/client.css .build/1-index.html _site/index.html .build/2-client.js _site/js/client.js .build/3-example.md _site/example.md
-
-.PHONY : clean-13
-clean-13: 
-	rm -rf .build
-
-.PHONY : clean-14
-clean-14: 
 	mkdir -p .build
 
-.PHONY : cmd-15
-cmd-15: 
+.PHONY : cmd-13
+cmd-13: 
 	rm -rf _site
 
 .PHONY : clean
-clean: clean-12 clean-13 clean-14 cmd-15
+clean: clean-10 clean-11 clean-12 cmd-13

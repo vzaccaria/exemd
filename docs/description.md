@@ -1,28 +1,40 @@
+What is it
+----------
 
-## What is it
+It is a markdown pre-processor that runs code inside *code blocks*, by
+pasting the output back into the original document. Regarding output:
 
-It is a markdown pre-processor that runs code inside *code blocks*, by pasting the output back into the original document. It can produce either processed markdown (with inlined SVG or base64 encoded png) or HTML.
+-   The default output is HTML+SVG while option `-g` forces HTML+PNG.
 
-## News
+-   If you need markdown, use `-r` for Markdown+PNG. If you need
+    Markdown+PDF (compatible with pdf generation in pandoc), use `-p`.
 
-It supports `pdf` now (March 2015). Stay tuned for other goodies coming in.
+News
+----
 
-## Available plugins:
+As of March 2015, I am rewriting the documentation of the plugins. Stay
+tuned for other updates.
 
-* `exemd-dot`       (Graphviz dot)
-* `exemd-ascidia`   (Ascidia)
-* `exemd-ditaa`     (Ditaa plugins)
-* `exemd-pn`        (Petri nets)
+Available plugins:
+------------------
 
-Look [here](http://www.vittoriozaccaria.net/exemd/) for examples.
+To see the list of currently available plugins and links to the docs,
+type:
 
-## Defaults
+``` {.bash}
+> exemd list
+```
 
-By default, `exemd` invokes `pandoc` to generate html with inlined svg. To get raw markdown, use `--raw` or `--pdf`.
+If you are on NPM.js, look
+[here](http://www.vittoriozaccaria.net/exemd/) for more examples.
 
-## Syntax
 
-Each code block should begin with the language specifier followed by a bang (`!`) between brackets `{}`, e.g., if you have a diagram in the dot language:
+Syntax
+------
+
+Each Markdown code block should begin with the language specifier followed by a
+bang (`!`) between brackets `{}`, e.g., if you have a diagram in the dot
+language:
 
     ```{dot !}
 
@@ -37,26 +49,36 @@ Each code block should begin with the language specifier followed by a bang (`!`
 
     ```
 
-`exemd` will invoke the `exemd-dot` plugin (which should be installed separately). The plugin will parse the block code by invoking the actual `dot` executable and the parsed `svg` will be pasted into the final markdown (or html).
+`exemd` will invoke the `exemd-dot` plugin (which should be installed
+separately). The plugin will parse the block code by invoking the actual
+`dot` executable and the parsed `svg` will be pasted into the final
+markdown (or html).
 
-Depending on the plugin, you can also pass parameters (just as in org-mode)
+Depending on the plugin, you can also pass parameters (just as in
+org-mode)
 
     ```{plugin-name ! plugin parameters string}
 
 
     ```
 
-## Plugins
+Plugins
+-------
 
-Look for npm modules prefixed with `exemd`. I wrote only `exemd-dot` and `exemd-ditaa` for diagrams. Feel free to provide plugins for R (like `kintr`) or other languages.
+Look for npm modules prefixed with `exemd`. I wrote only `exemd-dot` and
+`exemd-ditaa` for diagrams. Feel free to provide plugins for R (like
+`kintr`) or other languages.
 
 Each plugin should export a `process(block, opts)` function, where:
 
-* `block` is the string representing the inner part of the block code
-* `opts` is an object with the following properties:
+-   `block` is the string representing the inner part of the block code
+-   `opts` is an object with the following properties:
 
-    - `tmpdir` an already setup temporary directory where the plugin can mess around but not delete.
-    - `params` the string following the bang (`!`) in the block declaration
-    - `target-mode` it can be either `html`, `pdf`, or `raw`
+    -   `tmpdir` an already setup temporary directory where the plugin
+        can mess around but not delete.
+    -   `params` the string following the bang (`!`) in the block
+        declaration
+    -   `target-mode` it can be either `html`, `pdf`, or `raw`
 
-The `process` function should return the markdown text to replace the original block either directly or through a promise.
+The `process` function should return the markdown text to replace the
+original block either directly or through a promise.

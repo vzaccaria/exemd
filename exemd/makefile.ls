@@ -58,21 +58,15 @@ parse ->
 
         @collect "update-docs", -> [
                     @cmd "../cli.js -g ./assets/example.md > ./assets/example.html"
-                    @cmd "cat ../docs/usage.md ../docs/description.md | pandoc > ./assets/usage.html"
+                    @cmd "(echo \"\\`\\`\\`\" && cat ../docs/usage.md && echo \"\\`\\`\\`\" && cat ../docs/description.md) | pandoc > ./assets/usage.html"
                     ]
         ]
 
     @collect "deploy", ->
         @command-seq -> [
-            @make "all"
-            @cmd "blog-ftp-cli -l #name -r #baseUrl"
-            ]
-
-
-    @collect "complete", ->
-        @command-seq -> [
             @make "update-docs"
             @make "all"
+            @cmd "blog-ftp-cli -l #name -r #baseUrl"
             ]
 
     @collect "clean", -> [
