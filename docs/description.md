@@ -28,13 +28,12 @@ type:
 If you are on NPM.js, look
 [here](http://www.vittoriozaccaria.net/exemd/) for more examples.
 
-
 Syntax
 ------
 
-Each Markdown code block should begin with the language specifier followed by a
-bang (`!`) between brackets `{}`, e.g., if you have a diagram in the dot
-language:
+Each Markdown code block should begin with the language specifier
+followed by a bang (`!`) between brackets `{}`, e.g., if you have a
+diagram in the dot language:
 
     ```{dot !}
 
@@ -64,6 +63,8 @@ org-mode)
 
 Plugins
 -------
+
+**This section is obsolete**, wait for the new documentation that should arrive soon.
 
 Look for npm modules prefixed with `exemd`. I wrote only `exemd-dot` and
 `exemd-ditaa` for diagrams. Feel free to provide plugins for R (like
