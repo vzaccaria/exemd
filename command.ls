@@ -49,4 +49,5 @@ if not o['list']
 else
   console.log "Available plugin list:"
   console.log ""
-  printAll("exemd")
+  printAll("exemd").caught (err, resp)->
+    console.log err, resp

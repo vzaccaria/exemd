@@ -1,4 +1,3 @@
-
 {docopt}            = require('docopt')
 _                   = require('lodash')
 {cat,mkdir,rm,exec} = require('shelljs')
@@ -9,6 +8,7 @@ asyncrepl           = require('async-replace')
 debug               = require('debug')('exemd')
 $                   = require('underscore.string')
 uid = require("uid")
+chalk = require('chalk')
 
 #module-path = "/usr/local/share/npm/lib/node_modules/"
 module-path = ""
@@ -100,13 +100,18 @@ replace-handler-gen = (tmpdir, target-mode, code-block, offset, string, done) --
     opts             = {}
     opts.target-mode = target-mode
     opts.params      = params
+    opts.params.jparams    = {}
+    try
+         opts.params.jparams = JSON.parse("{ #{opts.params} }")
+    catch e
+
     opts.orig        = code-block
     opts.tmpdir      = tmpdir
 
     plugin-template = (targets, block, opts) ->
 
         params ?= opts.params
-        params ?= ''
+        params ?= {}
 
         new Promise (resolve, preject) ->
 
@@ -121,12 +126,13 @@ replace-handler-gen = (tmpdir, target-mode, code-block, offset, string, done) --
                   cmd = targets[opts.target-mode].cmd(block, temp-file, opts.tmpdir, params)
                   debug cmd
                   exec cmd, {+async, +silent}, (code, output) ->
-                      output = targets[opts.target-mode].output(temp-file, opts.tmpdir, output)
+                      output = targets[opts.target-mode].output(temp-file, opts.tmpdir, output, params)
                       debug output
                       if not code
+                          _msg("Generated image in #{opts.target-mode}")
                           resolve(output)
                       else
-                          resolve("```#block```")
+                          reject("Cant parse #{opts.target-mode}");
               else
                   resolve("```#block```")
             catch e
