@@ -118,26 +118,27 @@ replace-handler-gen = (tmpdir, target-mode, code-block, offset, string, done) --
             debug "Running template"
             debug targets
             debug opts.target-mode
+            cmd = ""
             try
               if targets[opts.target-mode]?
                   temp-file = uid(7)
                   debug "Target mode: #{opts.target-mode}"
                   debug targets
-                  cmd = targets[opts.target-mode].cmd(block, temp-file, opts.tmpdir, params)
+                  debug targets[opts.target-mode].cmd
+                  cmd := targets[opts.target-mode].cmd(block, temp-file, opts.tmpdir, params)
                   debug cmd
                   exec cmd, {+async, +silent}, (code, output) ->
                       output = targets[opts.target-mode].output(temp-file, opts.tmpdir, output, params)
                       debug output
                       if not code
-                          _msg("Generated image in #{opts.target-mode}")
                           resolve(output)
                       else
                           reject("Cant parse #{opts.target-mode}");
               else
                   resolve("```#block```")
             catch e
-                debug "Error: #e"
-                resolve("```Error processing exemd: #e```")
+                console.log("Error processing exemd: error #e, command #cmd")
+                process.exit(1)
 
     opts.plugin-template = plugin-template
 
